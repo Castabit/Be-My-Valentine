@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Valentines Day</title>
+  <script>
+    const isGitHubPages = window.location.hostname === 'castabit.github.io';
+    const base = isGitHubPages ? '/Be-My-Valentine/' : '/';
+    document.write(`<base href="${base}">`);
+</script> 
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     .gradient-background {
@@ -43,6 +48,12 @@
           No
         </button>
       </div>
+      <div class="flex gap-4 pt-[20px] items-center" id="nextSectionButton">
+        <button id="nextButton"
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-[20px] font-medium disabled:pointer-events-none disabled:opacity-50 hover:bg-green-400 min-h-12 min-w-[75px] px-4 py-2 bg-green-500 text-white transition">
+          Next
+        </button>
+      </div>
     </div>
   </div>
 
@@ -50,9 +61,13 @@
     import confetti from 'https://cdn.skypack.dev/canvas-confetti';
     const yesButton = document.getElementById('yesButton');
     const noButton = document.getElementById('noButton');
+    const nextButton = document.getElementById('nextButton');
     const imageDisplay = document.getElementById('imageDisplay');
     const valentineQuestion = document.getElementById('valentineQuestion');
     const responseButtons = document.getElementById('responseButtons');
+    const nextSectionButton = document.getElementById('nextSectionButton');
+
+    nextSectionButton.style.display = 'none';
   
     let noClickCount = 0;
     let buttonHeight = 48; // Starting height in pixels
@@ -86,9 +101,14 @@
   
     yesButton.addEventListener('click', () => {
       imageDisplay.src = './images/image7.gif'; // Change to image7.gif
-      valentineQuestion.textContent = "Yayyy!! :3"; // Change the question text
+      valentineQuestion.textContent = "Yayyy!!"; // Change the question text
       responseButtons.style.display = 'none'; // Hide both buttons
+      nextSectionButton.style.display = '';
       confetti(); // Trigger confetti animation
+    });
+
+    nextSectionButton.addEventListener('click', () => {
+      window.location.href = "food.html";
     });
   </script>  
 </body>
