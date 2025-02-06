@@ -9,6 +9,22 @@ const victorySound = document.getElementById('victorySound');
 // scoreDisplay.textContent = `Score: 0/${totalQuestions}`;
 
 function handleAnswer(selectedOption, answerType) {
+    const response = selectedOption.textContent;
+
+    fetch("https://script.google.com/macros/s/AKfycbzQmO5qSwD8Ep1p5ptfmpXeDkgW2OENeLgBMTov8FkqQZDrsMHJEoPQ3MX9JpnBlT5pQA/exec", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ response: "text" })  // Send the response value
+    })
+    .then(res => res.text())
+    .then(data => {
+        console.log("Response from server:", data);  // Log the response from the server
+        alert("Response saved: " + data);
+    })
+    .catch(err => {
+        console.error("Error:", err); // Catch any errors and log them
+    });
+
     const questionBox = selectedOption.parentElement;
     if (questionBox.classList.contains('answered')) return;
     
