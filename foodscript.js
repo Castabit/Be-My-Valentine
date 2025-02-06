@@ -14,10 +14,13 @@ function handleAnswer(selectedOption, answerType) {
     fetch("https://script.google.com/macros/s/AKfycbzjcoQrZ1UhGRIcuBF1RL1uswRzTTsqJKE2C8DFpo2ODZKU7gbmFnmZieeKePYfNK_Sew/exec", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ response: "text" })  // Send the response value
+        body: JSON.stringify({ response: "text" }),  // Send the response value
+        mode: 'no-cors',
     })
-    .then(response => response.json())
-    .then(data => console.log(data))
+    .then(response => {
+        // In 'no-cors' mode, the response will be opaque, so you can't access the data directly
+        console.log('Request sent, but no response data available');
+      })
     .catch(error => console.error('Error:', error));
 
     const questionBox = selectedOption.parentElement;
