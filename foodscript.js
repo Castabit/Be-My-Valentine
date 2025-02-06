@@ -11,19 +11,14 @@ const victorySound = document.getElementById('victorySound');
 function handleAnswer(selectedOption, answerType) {
     const response = selectedOption.textContent;
 
-    fetch("https://script.google.com/macros/s/AKfycbw6Uh-yxXkbD4AvQhCpt-5-h4U0__7aca5pdRORybN3xEKK6JZRBFhaQMGuiwRDizBN/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbzjcoQrZ1UhGRIcuBF1RL1uswRzTTsqJKE2C8DFpo2ODZKU7gbmFnmZieeKePYfNK_Sew/exec", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ response: "text" })  // Send the response value
     })
-    .then(res => res.text())
-    .then(data => {
-        console.log("Response from server:", data);  // Log the response from the server
-        alert("Response saved: " + data);
-    })
-    .catch(err => {
-        console.error("Error:", err); // Catch any errors and log them
-    });
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
 
     const questionBox = selectedOption.parentElement;
     if (questionBox.classList.contains('answered')) return;
