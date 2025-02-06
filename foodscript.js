@@ -9,12 +9,14 @@ const victorySound = document.getElementById('victorySound');
 // scoreDisplay.textContent = `Score: 0/${totalQuestions}`;
 
 function handleAnswer(selectedOption, answerType) {
-    selectedOption.textContent = (answeredCount+1) + ". " + selectedOption.textContent;
+    
 
     const questionBox = selectedOption.parentElement;
-    if (questionBox.classList.contains('answered')) return;
-    
+
+    // if (questionBox.classList.contains('answered')) return;
     // questionBox.classList.add('answered');
+
+    selectedOption.classList.add('disabled');
     answeredCount++;
     
     if (answeredCount == 3) {
@@ -40,6 +42,7 @@ function handleAnswer(selectedOption, answerType) {
             correctOption.style.animation = 'pulse 0.5s ease'; // Add visual feedback
         }, 500);
     }
+    selectedOption.textContent = (answeredCount) + ". " + selectedOption.textContent;
 
     // Celebration check and scroll to top
     if (answeredCount === totalQuestions) {
