@@ -11,7 +11,7 @@ const victorySound = document.getElementById('victorySound');
 function handleAnswer(selectedOption, answerType) {
     const response = selectedOption.textContent;
 
-    fetch("https://script.google.com/macros/s/AKfycbzQmO5qSwD8Ep1p5ptfmpXeDkgW2OENeLgBMTov8FkqQZDrsMHJEoPQ3MX9JpnBlT5pQA/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbyj_aN_w5dhI7G33IsPW0QNfvWwpzuvU1UPuczGiF5J3ipT9-fJyiqw0wJ-wMJUnuyhew/exec", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ response: "text" })  // Send the response value
