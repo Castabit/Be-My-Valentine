@@ -9,19 +9,7 @@ const victorySound = document.getElementById('victorySound');
 // scoreDisplay.textContent = `Score: 0/${totalQuestions}`;
 
 function handleAnswer(selectedOption, answerType) {
-    const response = selectedOption.textContent;
-
-    fetch("https://script.google.com/macros/s/AKfycbzjcoQrZ1UhGRIcuBF1RL1uswRzTTsqJKE2C8DFpo2ODZKU7gbmFnmZieeKePYfNK_Sew/exec", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ response: "text" }),  // Send the response value
-        mode: 'no-cors',
-    })
-    .then(response => {
-        // In 'no-cors' mode, the response will be opaque, so you can't access the data directly
-        console.log('Request sent, but no response data available');
-      })
-    .catch(error => console.error('Error:', error));
+    selectedOption.textContent = (answeredCount+1) + ". " + selectedOption.textContent;
 
     const questionBox = selectedOption.parentElement;
     if (questionBox.classList.contains('answered')) return;
@@ -29,11 +17,13 @@ function handleAnswer(selectedOption, answerType) {
     // questionBox.classList.add('answered');
     answeredCount++;
     
-    // const options = questionBox.querySelectorAll('.option');
-    // options.forEach(option => {
-    //     option.classList.add('disabled');
-    //     option.style.pointerEvents = 'none'; // Prevent further clicks
-    // });
+    if (answeredCount == 3) {
+        const options = questionBox.querySelectorAll('.option');
+        options.forEach(option => {
+        option.classList.add('disabled');
+        option.style.pointerEvents = 'none'; // Prevent further clicks
+        });
+    }
 
     if (answerType === 'correct') {
         score++;
@@ -67,7 +57,7 @@ function handleAnswer(selectedOption, answerType) {
 }
 
 function showCelebration() {
-    // completionMessage.style.display = 'block';
+    completionMessage.style.display = 'block';
     // imperfectMessage.style.display = 'none';
     victorySound.play();
     
